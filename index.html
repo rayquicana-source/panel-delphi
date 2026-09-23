@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panel Delphi - Condominio Tipo Club San Cristóbal</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    min-height: 100vh;
+    padding: 20px;
+    color: #333;
+  }
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    overflow: hidden;
+  }
+  header {
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    color: #fff;
+    padding: 30px 40px;
+    text-align: center;
+  }
+  header h1 { font-size: 1.6rem; margin-bottom: 8px; }
+  header p { font-size: 0.95rem; opacity: 0.9; }
+
+  .progress-bar {
+    height: 6px;
+    background: #e0e0e0;
+    position: relative;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #00c6ff, #0072ff);
+    width: 0%;
+    transition: width 0.4s ease;
+  }
+
+  .content { padding: 30px 40px; }
+
+  .section-title {
+    background: #f0f4f8;
+    padding: 12px 18px;
+    border-left: 5px solid #0072ff;
+    border-radius: 6px;
+    margin: 25px 0 15px;
+    font-weight: 600;
+    color: #1e3c72;
+    font-size: 1.1rem;
+  }
+
+  .subtitle {
+    font-size: 0.95rem;
+    color: #555;
+    margin-bottom: 15px;
+    font-style: italic;
+  }
+
+  label { display: block; margin-bottom: 6px; font-weight: 500; font-size: 0.92rem; }
+  input[type="text"], input[type="number"], select, textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: border 0.3s;
+    font-family: inherit;
+  }
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #0072ff;
+    box-shadow: 0 0 0 3px rgba(0,114,255,0.1);
+  }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+    font-size: 0.88rem;
+  }
+  th {
+    background: #1e3c72;
+    color: #fff;
+    padding: 10px 8px;
+    text-align: left;
+    font-weight: 600;
+  }
+  td {
+    padding: 8px;
+    border-bottom: 1px solid #e0e0e0;
+    vertical-align: middle;
+  }
+  tr:hover { background: #f9fbff; }
+
+  .likert-group { display: flex; gap: 4px; justify-content: center; }
+  .likert-group label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 0.7rem;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 6px;
+    transition: background 0.2s;
+    margin-bottom: 0;
+  }
+  .likert-group label:hover { background: #e8f1ff; }
+  .likert-group input { margin-bottom: 3px; cursor: pointer; }
+
+  .btn {
+    background: linear-gradient(135deg, #0072ff, #00c6ff);
+    color: #fff;
+    border: none;
+    padding: 14px 28px;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-top: 20px;
+  }
+  .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0,114,255,0.4);
+  }
+  .btn-secondary {
+    background: linear-gradient(135deg, #6c757d, #495057);
+    margin-left: 10px;
+  }
+  .btn-group { text-align: center; padding-bottom: 30px; }
+
+  .hidden { display: none; }
+
+  .alert {
+    background: #fff3cd;
+    border-left: 5px solid #ffc107;
+    padding: 12px 18px;
+    border-radius: 6px;
+    margin: 15px 0;
+    font-size: 0.9rem;
+  }
+
+  .success {
+    background: #d4edda;
+    border-left: 5px solid #28a745;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+    text-align: center;
+  }
+
+  .risk-row td:first-child { font-weight: 600; color: #1e3c72; }
+
+  @media (max-width: 768px) {
+    .content { padding: 20px; }
+    header { padding: 20px; }
+    header h1 { font-size: 1.2rem; }
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    table { font-size: 0.78rem; }
+    th, td { padding: 6px 4px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>🔬 Panel Delphi – Gestión de Riesgos PMI</h1>
+    <p>Condominio Tipo Club San Cristóbal de Huamanga – 2026</p>
+    <p style="font-size:0.85rem; margin-top:8px;">Universidad Nacional de San Cristóbal de Huamanga</p>
+  </header>
+
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+
+  <div class="content">
+
+    <!-- ================= SELECCIÓN DE RONDA ================= -->
+    <div id="step-select">
+      <div class="section-title">📋 Seleccione la ronda a completar</div>
+      <div class="alert">
+        <strong>Nota:</strong> Si aún no ha completado la Ronda 1, comience por ella. La Ronda 2 solo debe completarse después de recibir el resumen de resultados de la Ronda 1.
+      </div>
+      <div class="grid-2">
+        <button class="btn" onclick="startRound(1)">▶ Iniciar Ronda 1 (Validación)</button>
+        <button class="btn btn-secondary" onclick="startRound(2)">▶ Iniciar Ronda 2 (Valoración)</button>
+      </div>
+    </div>
+
+    <!-- ================= RONDA 1 ================= -->
+    <form id="form-round1" class="hidden" onsubmit="submitRound(event, 1)">
+
+      <div class="section-title">SECCIÓN I: Datos generales del experto (anónimos)</div>
+
+      <div class="grid-2">
+        <div>
+          <label>Años de experiencia en gestión de proyectos de construcción *</label>
+          <select name="exp" required>
+            <option value="">Seleccione...</option>
+            <option>3–5 años</option>
+            <option>6–10 años</option>
+            <option>11–15 años</option>
+            <option>Más de 15 años</option>
+          </select>
+        </div>
+        <div>
+          <label>¿Ha aplicado la metodología PMI/PMBOK en proyectos? *</label>
+          <select name="pmi" required>
+            <option value="">Seleccione...</option>
+            <option>Sí</option>
+            <option>No</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="grid-2" style="margin-top:15px;">
+        <div>
+          <label>¿Ha trabajado en proyectos en la región Ayacucho o zonas periurbanas? *</label>
+          <select name="region" required>
+            <option value="">Seleccione...</option>
+            <option>Sí</option>
+            <option>No</option>
+          </select>
+        </div>
+        <div>
+          <label>Rol actual en el proyecto *</label>
+          <select name="rol" required>
+            <option value="">Seleccione...</option>
+            <option>Residente de Obra</option>
+            <option>Supervisor</option>
+            <option>Jefe de Oficina Técnica</option>
+            <option>Jefe de Procura/Logística</option>
+            <option>Proyectista</option>
+            <option>Jefe de Frente</option>
+            <option>Otro</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="section-title">SECCIÓN II: Validación de riesgos identificados</div>
+      <p class="subtitle">Evalúe cada riesgo según su <strong>claridad</strong> y <strong>pertinencia</strong> en escala 1–5 (1 = Muy deficiente, 5 = Excelente).</p>
+
+      <div id="round1-risks"></div>
+
+      <div class="section-title">SECCIÓN III: Propuesta de riesgos adicionales</div>
+      <p class="subtitle">Indique riesgos no contemplados que considere relevantes.</p>
+
+      <div id="extra-risks"></div>
+
+      <div class="section-title">SECCIÓN IV: Preguntas abiertas de contexto</div>
+
+      <div style="margin-bottom:15px;">
+        <label>¿Qué riesgo tiene mayor probabilidad de materializarse y por qué?</label>
+        <textarea name="q1" rows="3"></textarea>
+      </div>
+      <div style="margin-bottom:15px;">
+        <label>¿Qué riesgo tendría el mayor impacto económico si se materializa?</label>
+        <textarea name="q2" rows="3"></textarea>
+      </div>
+      <div style="margin-bottom:15px;">
+        <label>¿Qué disparador (trigger) recomendaría monitorear?</label>
+        <textarea name="q3" rows="3"></textarea>
+      </div>
+
+      <div class="btn-group">
+        <button type="submit" class="btn">✅ Enviar Ronda 1</button>
+        <button type="button" class="btn btn-secondary" onclick="location.reload()">Cancelar</button>
+      </div>
+    </form>
+
+    <!-- ================= RONDA 2 ================= -->
+    <form id="form-round2" class="hidden" onsubmit="submitRound(event, 2)">
+
+      <div class="alert">
+        <strong>Retroalimentación Ronda 1:</strong> Revise los resultados agregados antes de valorar. Si lo considera necesario, ajuste su evaluación respecto a la ronda anterior.
+      </div>
+
+      <div class="section-title">SECCIÓN II: Valoración de Probabilidad (P) e Impacto (I)</div>
+
+      <p class="subtitle"><strong>Escala Probabilidad:</strong> 0.10 (Muy baja) · 0.30 (Baja) · 0.50 (Moderada) · 0.70 (Alta) · 0.90 (Muy alta)</p>
+      <p class="subtitle"><strong>Escala Impacto:</strong> 0.05 (Muy bajo) · 0.10 (Bajo) · 0.20 (Moderado) · 0.40 (Alto) · 0.80 (Muy alto)</p>
+
+      <div id="round2-risks"></div>
+
+      <div class="section-title">SECCIÓN III: Estimación de rangos para simulación Montecarlo</div>
+      <p class="subtitle">Para riesgos priorizados (P×I ≥ 0.20), indique los valores optimista, más probable y pesimista del impacto económico (% del presupuesto afectado).</p>
+
+      <div id="montecarlo-risks"></div>
+
+      <div class="section-title">SECCIÓN IV: Correlaciones entre riesgos</div>
+      <p class="subtitle">Marque "Sí" si la materialización de un riesgo incrementa la probabilidad o impacto del otro.</p>
+
+      <table>
+        <thead>
+          <tr><th>Par de riesgos</th><th style="text-align:center;">¿Existe correlación?</th><th>Justificación breve</th></tr>
+        </thead>
+        <tbody id="correlations-body"></tbody>
+      </table>
+
+      <div class="section-title">SECCIÓN V: Estrategias de respuesta preliminares</div>
+      <p class="subtitle">Para riesgos de prioridad alta (P×I ≥ 0.20), seleccione la estrategia más adecuada según el PMBOK 8.</p>
+
+      <div id="strategies-risks"></div>
+
+      <div class="btn-group">
+        <button type="submit" class="btn">✅ Enviar Ronda 2</button>
+        <button type="button" class="btn btn-secondary" onclick="location.reload()">Cancelar</button>
+      </div>
+    </form>
+
+    <!-- ================= CONFIRMACIÓN ================= -->
+    <div id="step-success" class="hidden">
+      <div class="success">
+        <h2>🎉 ¡Gracias por su participación!</h2>
+        <p>Sus respuestas han sido registradas exitosamente.</p>
+        <p style="margin-top:10px; font-size:0.9rem;">Puede cerrar esta ventana. Si desea completar la otra ronda, recargue la página.</p>
+        <button class="btn" style="margin-top:20px;" onclick="location.reload()">Volver al inicio</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   BASE DE DATOS DE RIESGOS (extraída de la tesis)
+   ============================================================ */
+const risks = {
+  A: {
+    title: "Riesgos técnicos y de diseño",
+    items: [
+      { code: "A1", desc: "Incompatibilidades entre especialidades (arquitectura, estructuras, sanitarias, eléctricas, telecomunicaciones)" },
+      { code: "A2", desc: "Deficiencias en procesos de encofrado y vaciados masivos" },
+      { code: "A3", desc: "Errores en el diseño de subdrenaje y drenaje pluvial" },
+      { code: "A4", desc: "Insuficiencia en el diseño de defensas ribereñas (920 m, caudal 500 m³/s, tirante 3.50 m)" },
+      { code: "A5", desc: "Incompatibilidad entre el diseño de piscinas y el sistema de tanques de compensación" }
+    ]
+  },
+  B: {
+    title: "Riesgos logísticos y geográficos",
+    items: [
+      { code: "B1", desc: "Retraso en el abastecimiento de acero, cemento y agregados por dependencia de proveedores externos" },
+      { code: "B2", desc: "Dificultad de acceso al proyecto en temporada de lluvias" },
+      { code: "B3", desc: "Distancia a canteras y plantas de producción de agregados" },
+      { code: "B4", desc: "Rotura de stock de insumos críticos" },
+      { code: "B5", desc: "Condiciones climáticas adversas (lluvias intensas, bajas temperaturas)" }
+    ]
+  },
+  C: {
+    title: "Riesgos regulatorios y ambientales",
+    items: [
+      { code: "C1", desc: "Demora o denegatoria del CIRA por cercanía a la Zona Arqueológica Wari" },
+      { code: "C2", desc: "Demora en la Autorización ANA (Ley 29338) para intervenir la faja marginal del río Pongora" },
+      { code: "C3", desc: "Incumplimiento de la Ley 29090 (habilitaciones urbanas)" },
+      { code: "C4", desc: "Exigencias adicionales por normativa sísmica RNE E.030" },
+      { code: "C5", desc: "Riesgo de inundación por colindancia con el río Pongora" }
+    ]
+  },
+  D: {
+    title: "Riesgos de gestión y organización",
+    items: [
+      { code: "D1", desc: "Ausencia de gestión formal de riesgos (enfoque reactivo)" },
+      { code: "D2", desc: "Falta de identificación temprana de riesgos" },
+      { code: "D3", desc: "Limitada cultura preventiva del personal" },
+      { code: "D4", desc: "Falta de reservas de contingencia calculadas formalmente" }
+    ]
+  },
+  E: {
+    title: "Riesgos de seguridad y salud",
+    items: [
+      { code: "E1", desc: "Falta de cultura de prevención en seguridad y salud" },
+      { code: "E2", desc: "Condiciones de trabajo adversas por clima extremo" },
+      { code: "E3", desc: "Accidentes laborales que generen paralizaciones o sanciones" }
+    ]
+  }
+};
+
+/* Riesgos priorizados (para Montecarlo y estrategias) */
+const priorityRisks = ["A1", "A4", "B1", "C1", "C5"];
+
+/* Pares de correlación predefinidos */
+const correlationPairs = [
+  { a: "B5 (lluvias)", b: "A2 (vaciados)" },
+  { a: "B5 (lluvias)", b: "B2 (acceso)" },
+  { a: "C1 (CIRA)", b: "A4 (defensas ribereñas)" },
+  { a: "B1 (abastecimiento)", b: "A2 (vaciados)" },
+  { a: "C5 (inundación)", b: "A4 (defensas)" }
+];
+
+/* ============================================================
+   RENDERIZADO DINÁMICO
+   ============================================================ */
+
+function likertScale(name) {
+  const labels = ["1", "2", "3", "4", "5"];
+  return `<div class="likert-group">` + labels.map(v => `
+    <label>
+      <input type="radio" name="${name}" value="${v}" required>
+      <span>${v}</span>
+    </label>`).join("") + `</div>`;
+}
+
+/* ---------- RONDA 1: Render riesgos ---------- */
+function renderRound1() {
+  const container = document.getElementById("round1-risks");
+  let html = "";
+
+  for (const cat in risks) {
+    html += `<h4 style="margin:20px 0 10px; color:#2c5364;">📌 ${risks[cat].title}</h4>`;
+    html += `<table><thead><tr>
+      <th style="width:8%;">N°</th>
+      <th style="width:42%;">Riesgo</th>
+      <th style="width:25%; text-align:center;">Claridad (1-5)</th>
+      <th style="width:25%; text-align:center;">Pertinencia (1-5)</th>
+    </tr></thead><tbody>`;
+
+    risks[cat].items.forEach(r => {
+      html += `<tr class="risk-row">
+        <td>${r.code}</td>
+        <td>${r.desc}</td>
+        <td>${likertScale("claridad_" + r.code)}</td>
+        <td>${likertScale("pertinencia_" + r.code)}</td>
+      </tr>`;
+    });
+
+    html += `</tbody></table>`;
+  }
+  container.innerHTML = html;
+
+  /* Riesgos adicionales */
+  const extra = document.getElementById("extra-risks");
+  let extraHtml = "";
+  for (let i = 1; i <= 3; i++) {
+    extraHtml += `<div class="grid-2" style="margin-bottom:12px;">
+      <div>
+        <label>Categoría</label>
+        <select name="extra_cat_${i}">
+          <option value="">Seleccione...</option>
+          <option>Técnico</option>
+          <option>Logístico</option>
+          <option>Regulatorio</option>
+          <option>Gestión</option>
+          <option>Seguridad</option>
+        </select>
+      </div>
+      <div>
+        <label>Descripción del riesgo propuesto</label>
+        <input type="text" name="extra_desc_${i}" placeholder="Describa el riesgo...">
+      </div>
+    </div>`;
+  }
+  extra.innerHTML = extraHtml;
+}
+
+/* ---------- RONDA 2: Render riesgos ---------- */
+function renderRound2() {
+  const container = document.getElementById("round2-risks");
+  let html = "";
+
+  const probs = [0.10, 0.30, 0.50, 0.70, 0.90];
+  const impacts = [0.05, 0.10, 0.20, 0.40, 0.80];
+
+  for (const cat in risks) {
+    html += `<h4 style="margin:20px 0 10px; color:#2c5364;">📌 ${risks[cat].title}</h4>`;
+    html += `<table><thead><tr>
+      <th style="width:7%;">N°</th>
+      <th style="width:35%;">Riesgo</th>
+      <th style="width:29%;">Probabilidad (P)</th>
+      <th style="width:29%;">Impacto (I)</th>
+    </tr></thead><tbody>`;
+
+    risks[cat].items.forEach(r => {
+      const probOptions = probs.map(p =>
+        `<option value="${p}">${p.toFixed(2)}</option>`).join("");
+      const impOptions = impacts.map(i =>
+        `<option value="${i}">${i.toFixed(2)}</option>`).join("");
+
+      html += `<tr class="risk-row">
+        <td>${r.code}</td>
+        <td>${r.desc}</td>
+        <td>
+          <select name="prob_${r.code}" required style="width:100%;">
+            <option value="">-- P --</option>
+            ${probOptions}
+          </select>
+        </td>
+        <td>
+          <select name="imp_${r.code}" required style="width:100%;">
+            <option value="">-- I --</option>
+            ${impOptions}
+          </select>
+        </td>
+      </tr>`;
+    });
+
+    html += `</tbody></table>`;
+  }
+  container.innerHTML = html;
+
+  /* Montecarlo */
+  const mc = document.getElementById("montecarlo-risks");
+  let mcHtml = `<table><thead><tr>
+    <th>N°</th><th>Riesgo priorizado</th>
+    <th>Optimista (%)</th><th>Más probable (%)</th><th>Pesimista (%)</th>
+  </tr></thead><tbody>`;
+
+  priorityRisks.forEach(code => {
+    let desc = "";
+    for (const cat in risks) {
+      const found = risks[cat].items.find(x => x.code === code);
+      if (found) { desc = found.desc.substring(0, 60) + "..."; break; }
+    }
+    mcHtml += `<tr>
+      <td><strong>${code}</strong></td>
+      <td>${desc}</td>
+      <td><input type="number" name="mc_opt_${code}" step="0.1" min="0" max="100" placeholder="%"></td>
+      <td><input type="number" name="mc_mp_${code}" step="0.1" min="0" max="100" placeholder="%"></td>
+      <td><input type="number" name="mc_pes_${code}" step="0.1" min="0" max="100" placeholder="%"></td>
+    </tr>`;
+  });
+  mcHtml += `</tbody></table>`;
+  mc.innerHTML = mcHtml;
+
+  /* Correlaciones */
+  const corrBody = document.getElementById("correlations-body");
+  corrBody.innerHTML = correlationPairs.map((pair, idx) => `
+    <tr>
+      <td>${pair.a} → ${pair.b}</td>
+      <td style="text-align:center;">
+        <select name="corr_${idx}" required>
+          <option value="">--</option>
+          <option>Sí</option>
+          <option>No</option>
+        </select>
+      </td>
+      <td><input type="text" name="corr_just_${idx}" placeholder="Justificación breve..."></td>
+    </tr>
+  `).join("");
+
+  /* Estrategias */
+  const stratContainer = document.getElementById("strategies-risks");
+  const strategies = ["Evitar", "Transferir", "Mitigar", "Aceptar", "Escalar"];
+  let stratHtml = "";
+  priorityRisks.forEach(code => {
+    let desc = "";
+    for (const cat in risks) {
+      const found = risks[cat].items.find(x => x.code === code);
+      if (found) { desc = found.desc.substring(0, 70) + "..."; break; }
+    }
+    stratHtml += `<div style="margin-bottom:15px; padding:12px; background:#f9fbff; border-radius:8px;">
+      <strong>${code}:</strong> ${desc}<br>
+      <div style="margin-top:8px; display:flex; gap:12px; flex-wrap:wrap;">`;
+    strategies.forEach(s => {
+      stratHtml += `<label style="display:inline-flex; align-items:center; gap:5px; font-weight:normal; cursor:pointer;">
+        <input type="radio" name="strat_${code}" value="${s}" required> ${s}
+      </label>`;
+    });
+    stratHtml += `</div></div>`;
+  });
+  stratContainer.innerHTML = stratHtml;
+}
+
+/* ============================================================
+   NAVEGACIÓN Y ENVÍO
+   ============================================================ */
+
+function updateProgress(pct) {
+  document.getElementById("progressFill").style.width = pct + "%";
+}
+
+function startRound(n) {
+  document.getElementById("step-select").classList.add("hidden");
+  document.getElementById("step-success").classList.add("hidden");
+
+  if (n === 1) {
+    document.getElementById("form-round1").classList.remove("hidden");
+    updateProgress(50);
+  } else {
+    document.getElementById("form-round2").classList.remove("hidden");
+    updateProgress(50);
+  }
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function submitRound(event, round) {
+  event.preventDefault();
+
+  const form = event.target;
+  const formData = new FormData(form);
+  const data = {};
+
+  for (const [key, value] of formData.entries()) {
+    if (data[key]) {
+      // Convertir a array si hay múltiples valores
+      if (!Array.isArray(data[key])) data[key] = [data[key]];
+      data[key].push(value);
+    } else {
+      data[key] = value;
+    }
+  }
+
+  // Agregar metadatos
+  data._ronda = round;
+  data._fecha = new Date().toISOString();
+  data._proyecto = "Condominio Tipo Club San Cristóbal de Huamanga";
+
+  console.log(`📤 Datos Ronda ${round}:`, data);
+
+  /* ============================================================
+     OPCIÓN A: Guardar en localStorage (para pruebas)
+     ============================================================ */
+  const key = `delphi_round${round}_${Date.now()}`;
+  localStorage.setItem(key, JSON.stringify(data));
+
+  /* ============================================================
+     OPCIÓN B: Enviar a Google Sheets (ver instrucciones abajo)
+     ============================================================ */
+  // sendToGoogleSheets(data, round);
+
+  updateProgress(100);
+
+  form.classList.add("hidden");
+  document.getElementById("step-success").classList.remove("hidden");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+/* ============================================================
+   ENVÍO A GOOGLE SHEETS (OPCIONAL)
+   ============================================================ */
+function sendToGoogleSheets(data, round) {
+  const SCRIPT_URL = "https://script.google.com/macros/s/TU_ID_AQUI/exec";
+  fetch(SCRIPT_URL, {
+    method: "POST",
+    mode: "no-cors",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data)
+  })
+  .then(() => console.log("✅ Enviado a Google Sheets"))
+  .catch(err => console.error("❌ Error:", err));
+}
+
+/* ============================================================
+   INICIALIZACIÓN
+   ============================================================ */
+document.addEventListener("DOMContentLoaded", () => {
+  renderRound1();
+  renderRound2();
+});
+</script>
+
+</body>
+</html>
